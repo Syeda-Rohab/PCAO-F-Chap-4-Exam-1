@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ur-Latn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Prompting in 2026 - Explanation</title>
+<style>
+  * { box-sizing: border-box; }
+  html { font-size: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0d0d0d;
+    color: #e8e8e8;
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  .container { max-width: 780px; margin: 0 auto; padding: 32px 20px 60px; }
+  header {
+    text-align: center;
+    padding: 28px 20px;
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    color: #fff;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border: 1px solid #333;
+  }
+  header h1 { margin: 0 0 8px; font-size: 1.5em; }
+  header p { margin: 0; opacity: 0.75; font-style: italic; font-size: 0.95em; }
+  h2 {
+    color: #ffd75e;
+    border-bottom: 2px solid #333;
+    padding-bottom: 8px;
+    margin-top: 40px;
+    font-size: 1.25em;
+  }
+  .para-block {
+    background: #171717;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 14px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    border-left: 4px solid #555;
+  }
+  .para-label { color: #ff8a65; font-weight: 700; font-size: 0.9em; margin-bottom: 6px; display: block; }
+  .para-text { margin: 0; font-size: 1em; color: #ddd; }
+  .diagram-box {
+    background: #171717;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 18px 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    border: 1px solid #2a2a2a;
+  }
+  .diagram-box svg { width: 100%; height: auto; display: block; }
+  .diagram-caption { text-align: center; font-size: 0.85em; color: #999; margin-top: 10px; font-style: italic; }
+  table.mini-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.88em; }
+  table.mini-table th, table.mini-table td { border: 1px solid #333; padding: 6px 8px; text-align: right; color: #ddd; }
+  table.mini-table th { background: #222; color: #ffd75e; }
+  .summary-box {
+    background: #171717;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-top: 20px;
+  }
+  .summary-box ul { padding-left: 20px; margin: 0; }
+  .summary-box li { margin-bottom: 10px; color: #ddd; }
+  footer { text-align: center; font-size: 0.8em; color: #777; margin-top: 40px; }
+  footer a { color: #ffd75e; }
+
+  .quiz-intro {
+    background: #221c0e;
+    border: 1px solid #4a3d1a;
+    border-radius: 10px;
+    padding: 14px 18px;
+    color: #e0c060;
+    font-size: 0.95em;
+  }
+  .quiz-question {
+    background: #171717;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 16px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    border-left: 4px solid #ff8a65;
+  }
+  .quiz-q-text { margin: 0 0 12px; font-size: 1em; color: #f0f0f0; }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-option {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border: 1px solid #333; border-radius: 8px;
+    cursor: pointer; transition: background 0.15s, border-color 0.15s; font-size: 0.95em;
+    color: #ddd; background: #1c1c1c;
+  }
+  .quiz-option:hover { background: #242424; border-color: #555; }
+  .quiz-option input { accent-color: #ffd75e; width: 16px; height: 16px; flex-shrink: 0; }
+  .quiz-option.correct-answer { background: #14301c; border-color: #2e7d32; font-weight: 600; color: #8fe6a0; }
+  .quiz-option.wrong-answer { background: #341414; border-color: #c62828; color: #ff9e9e; }
+  .quiz-explain { margin-top: 12px; padding: 10px 14px; background: #1c1c1c; border-radius: 8px; font-size: 0.9em; color: #bbb; border: 1px solid #2a2a2a; }
+  .quiz-actions { text-align: center; margin: 30px 0 10px; }
+  .btn-primary, .btn-secondary {
+    padding: 12px 28px; font-size: 1em; border: none; border-radius: 8px;
+    cursor: pointer; font-weight: 600; margin: 0 6px;
+  }
+  .btn-primary { background: #ffd75e; color: #111; }
+  .btn-primary:hover { background: #e0bd40; }
+  .btn-secondary { background: #2a2a2a; color: #eee; }
+  .btn-secondary:hover { background: #3a3a3a; }
+  .score-banner {
+    text-align: center; font-size: 1.15em; font-weight: 700;
+    padding: 16px 20px; border-radius: 10px; margin: 20px 0;
+  }
+  .score-banner.pass { background: #14301c; color: #8fe6a0; border: 1px solid #2e7d32; }
+  .score-banner.fail { background: #341414; color: #ff9e9e; border: 1px solid #c62828; }
+
+  @media (max-width: 600px) {
+    .container { padding: 16px 12px 40px; }
+    header { padding: 20px 14px; border-radius: 10px; margin-bottom: 20px; }
+    header h1 { font-size: 1.3em; line-height: 1.4; }
+    header p { font-size: 0.95em; }
+    h2 { font-size: 1.15em; margin-top: 28px; padding-bottom: 6px; }
+    .para-block { padding: 14px 16px; margin: 10px 0; border-radius: 8px; }
+    .para-label { font-size: 0.95em; }
+    .para-text { font-size: 1em; line-height: 1.65; }
+    .diagram-box { padding: 10px; border-radius: 10px; }
+    .diagram-caption { font-size: 0.8em; }
+    table.mini-table { font-size: 0.78em; }
+    table.mini-table th, table.mini-table td { padding: 5px 5px; }
+    .summary-box { padding: 16px 18px; border-radius: 10px; }
+    .summary-box li { font-size: 1em; }
+    .quiz-intro { padding: 14px 16px; font-size: 0.98em; }
+    .quiz-question { padding: 16px 16px; margin: 12px 0; border-radius: 8px; }
+    .quiz-q-text { font-size: 1em; }
+    .quiz-option { padding: 12px 12px; font-size: 0.98em; gap: 8px; }
+    .quiz-explain { font-size: 0.95em; padding: 12px 14px; }
+    .quiz-actions { display: flex; flex-direction: column; gap: 10px; margin: 24px 0 10px; }
+    .btn-primary, .btn-secondary { width: 100%; margin: 0; padding: 14px 20px; font-size: 1em; }
+    .score-banner { font-size: 1.05em; padding: 14px 16px; }
+    footer { font-size: 0.85em; padding: 0 10px; }
+  }
+  @media (max-width: 380px) {
+    header h1 { font-size: 1.15em; }
+    .quiz-q-text strong { display: block; margin-bottom: 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>AI Prompting in 2026: A Crash Course</h1>
+  <p>Chapter Explanation — Roman Urdu (Bohat Bohat Asaan Version)</p>
+</header>
+
+<h2>Shuruaat</h2>
+
+<div class="para-block"><span class="para-label">Intro:</span><p class="para-text">Zyada tar log AI ko Google jaisa use karte hain — chhota sawal poochte, jawab dekh kar aage barh jate hain. Ye chhoti baaton ke liye theek hai, asal kaam ke liye nahi. Power users alag karte hain: AI ko aisi briefing dete hain jaise ek naye smart colleague ko dete — files, context, limits, aur clear sawal.</p></div>
+
+<div class="para-block"><span class="para-label">Zaroori baat shuru mein:</span><p class="para-text">Model stateless hai — usay khud kuch yaad nahi rehta, har baar sirf usi text se jawab deta hai jo iss waqt uske samne hai. Is liye almost har "advanced trick" ek hi cheez hai: sahi cheez andar daalo, ya galat cheez bahar rakho.</p></div>
+
+<div class="para-block"><span class="para-label">Zaroori Alfaz:</span><p class="para-text">Pretrained knowledge = jo AI ne training mein parha, bina dekhe. Knowledge cutoff = wo date jahan training rukti hai. Web search = live pages fetch kar ke parhna. Deep research = kai minute mein poori report banana. Slop = achi lagti khaali baat. Rubric = check karne wali list. Sycophancy = aapko wahi bolna jo aap sunna chahte ho. Context window = wo poora text jo AI dekh sakta hai. System prompt = company ki pehle se rakhi rules. Memory = tool ka note. Context rot = lambi chat mein jawab kharab hona. Projects = ek jagah jahan files/rules save hon. Reasoning = AI apna kaam khud likhta hai jawab se pehle.</p></div>
+
+<h2>Kya Badla Hai 2022 Se Ab Tak</h2>
+
+<div class="para-block"><span class="para-label">Badlaav:</span><p class="para-text">Context window 1000 guna bara ho gaya. Reasoning asli ban gayi. Web search built-in ho gayi. Code chalana built-in ho gaya. Images/audio normal ban gaye. Tools ab aapko yaad rakhte hain. Desktop apps aur coding agents aa gaye.</p></div>
+
+<h2>Part 1: AI Cheezein Kaise Jaanta Hai</h2>
+
+<div class="para-block"><span class="para-label">Idea 1 (Novice vs Power User):</span><p class="para-text">Sawal same hota hai, briefing alag hoti hai. Novice: "kaunsi gaari behtar hai?" — generic jawab. Power user: spec sheets, quotes attach karta hai, "trade-offs batao, achi tarah socho." AI ek naya, bohat smart colleague hai jo pehle din join hua hai — motivated hai, aapke baare mein kuch nahi jaanta. Har naye chat mein zero se shuru hota hai. Briefing ke 4 hisse: files, goal, limits, exact sawal.</p></div>
+
+<div class="para-block"><span class="para-label">Idea 2 (Pretrained Knowledge):</span><p class="para-text">AI ne duniya mein reh kar nahi seekha — sirf text parh kar seekha. Jo topic zyada likha gaya, usme AI strong hai. Jo kam likha gaya, usme weak hai. Strong: cooking, mashhoor movies. Sparse: kam maloom cheezein. Absent: private data, cutoff ke baad ki koi baat. Zaroori baat: typo fix karne ki zaroorat nahi. AI ne internet se galat baatein bhi seekhi hain.</p></div>
+
+<div class="para-block"><span class="para-label">Idea 3 (3 Tareeqe Jawab Dene Ke):</span><p class="para-text">AI 3 tareeqon se jawab deta hai: Pretrained (yaad se, purani cheezon ke liye), Web search (live pages se, current cheezon ke liye), Deep research (kai minute mein bohat sources se poori report). "AI Google nahi hai" — Google se link milta hai, AI se pura analysis milta hai. Behtar web search ke liye 3 aadatein: sources naam batao, har claim ke baad source mango, "unverified" likhne ko kaho.</p></div>
+
+<h2>Part 2: AI Se Achi Tarah Baat Karna</h2>
+
+<div class="diagram-box">
+<svg width="100%" viewBox="0 0 680 320" role="img">
+<title>Six-layer context stack diagram</title>
+<desc>Six layers form the context window: system prompt, memory, tool descriptions, your prompt, chat history, and uploaded files.</desc>
+<rect x="0" y="0" width="680" height="320" fill="#111111"/>
+<rect x="60" y="20" width="560" height="40" rx="6" fill="#2a2a2a" stroke="#8a8a8a" stroke-width="1"/>
+<text x="340" y="45" text-anchor="middle" font-size="13" fill="#f0f0f0">6. Aapki files (PDF, spreadsheet, image)</text>
+<rect x="60" y="65" width="560" height="40" rx="6" fill="#2a2a2a" stroke="#8a8a8a" stroke-width="1"/>
+<text x="340" y="90" text-anchor="middle" font-size="13" fill="#f0f0f0">5. Chat history (poori purani baat)</text>
+<rect x="60" y="110" width="560" height="40" rx="6" fill="#3a2f10" stroke="#c9a227" stroke-width="1.5"/>
+<text x="340" y="135" text-anchor="middle" font-size="13" fill="#ffd75e">4. Aapka prompt (aap har baar edit karte ho)</text>
+<rect x="60" y="155" width="560" height="40" rx="6" fill="#2a2a2a" stroke="#8a8a8a" stroke-width="1"/>
+<text x="340" y="180" text-anchor="middle" font-size="13" fill="#f0f0f0">3. Tool descriptions (web search, code)</text>
+<rect x="60" y="200" width="560" height="40" rx="6" fill="#3a2010" stroke="#c9622a" stroke-width="1.5"/>
+<text x="340" y="225" text-anchor="middle" font-size="13" fill="#ffa15e">2. Memory (tool khud likhta hai)</text>
+<rect x="60" y="245" width="560" height="40" rx="6" fill="#2a2a2a" stroke="#8a8a8a" stroke-width="1"/>
+<text x="340" y="270" text-anchor="middle" font-size="13" fill="#f0f0f0">1. System prompt (company pehle se rakhti hai)</text>
+<text x="340" y="305" text-anchor="middle" font-size="12" font-weight="600" fill="#ff8a65">Jo is stack mein nahi, wo iss jawab ke liye exist hi nahi karta</text>
+</svg>
+<p class="diagram-caption">Context Window ki 6 layers — sirf ye cheezein AI dekh sakta hai</p>
+</div>
+
+<div class="para-block"><span class="para-label">Idea 4 (Context Hi Sab Kuch Hai):</span><p class="para-text">Insaan ek waqt mein 4-7 cheezein yaad rakh sakta hai. AI hazaron lafz dekh sakta hai — lekin sirf jo aap ne diya hai. Context window mein 6 cheezein: System prompt, Tool descriptions, Aapka prompt, Chat history, Aapki files, Memory. Reading desk misaal: jo mez par hai, AI wahi parh sakta hai. Apni instructions daal sakte ho settings mein, lekin chhota rakho.</p></div>
+
+<div class="para-block"><span class="para-label">Context Rot aur Projects:</span><p class="para-text">Lambi chat mein kai alag topics dalne se jawab kharab hota jata hai. Jab topic badle, nayi chat kholo. Memory = tool ka likha hua note jo har naye chat mein dobara daala jata hai, model ki yaad nahi. Projects: jab aap 2 dafa same files/context paste kar chuke ho, usay Project mein daal do — har naya chat wahan se khud parh lega.</p></div>
+
+<div class="para-block"><span class="para-label">Idea 5 (Reasoning, ya "Achi Tarah Socho"):</span><p class="para-text">Modern AI khud thinking mode rakhta hai. 3 tareeqe on karne ke: plain zubaan mein "achi tarah socho" likho, thinking-mode switch use karo, ya tool khud on kar dega. Extended thinking matlab AI kai seconds/minutes tak socha ke jawab deta hai. Kab use na karo: chhote sawal, quick lookups — slow aur zyada mehnga hota hai.</p></div>
+
+<div class="para-block"><span class="para-label">Idea 6 (Sycophancy Aur Usay Theek Karna):</span><p class="para-text">AI ne millions users se "thumbs up" dekh kar seekha — agree karna zyada thumbs up leta hai. Fix: neutral alfaz use karo. "kya X sahi hai?" ki jagah "X ko dono taraf se evaluate karo" likho. Rubric use karo: number force karo (1-10) — number vague tareef se behtar hota hai kyun ke compare/track kar sakte ho.</p></div>
+
+<div class="diagram-box">
+<svg width="100%" viewBox="0 0 680 220" role="img">
+<title>Brainstorm-iterate loop diagram</title>
+<desc>Six steps: load context, ask for 3-5 options, give feedback, ask again, repeat, then expand the chosen option.</desc>
+<rect x="0" y="0" width="680" height="220" fill="#111111"/>
+<rect x="10" y="30" width="200" height="70" rx="8" fill="#2a2a2a" stroke="#8a8a8a" stroke-width="1"/>
+<text x="110" y="58" text-anchor="middle" font-size="13" font-weight="600" fill="#f0f0f0">1. Poora Context</text>
+<text x="110" y="78" text-anchor="middle" font-size="10" fill="#aaa">Limits, files, audience</text>
+<rect x="240" y="30" width="200" height="70" rx="8" fill="#3a2f10" stroke="#c9a227" stroke-width="1"/>
+<text x="340" y="58" text-anchor="middle" font-size="13" font-weight="600" fill="#ffd75e">2-4. Options + Feedback</text>
+<text x="340" y="78" text-anchor="middle" font-size="10" fill="#e0c060">3-5 options, dohrao</text>
+<rect x="470" y="30" width="200" height="70" rx="8" fill="#2a2a2a" stroke="#8a8a8a" stroke-width="1"/>
+<text x="570" y="58" text-anchor="middle" font-size="13" font-weight="600" fill="#f0f0f0">5-6. Expand Karo</text>
+<text x="570" y="78" text-anchor="middle" font-size="10" fill="#aaa">Chuna hua option, poora</text>
+<text x="340" y="150" text-anchor="middle" font-size="13" font-weight="600" fill="#ff8a65">Skip a step, get slop. Run the cycle, ship.</text>
+<text x="340" y="175" text-anchor="middle" font-size="11" fill="#999">Zyada tar power AI ka nahi, loop ka hota hai</text>
+</svg>
+<p class="diagram-caption">Brainstorm-Iterate Loop — options mango, feedback do, dobara, tabhi expand karo</p>
+</div>
+
+<div class="para-block"><span class="para-label">Idea 7 (Brainstorm-Iterate Loop):</span><p class="para-text">Ek hi cheez maangna average jawab deta hai. 6 steps: poora context do, 3-5 options mango (expand mat karwao), bilkul batao kya pasand aya kya nahi, feedback par naye options mango, dohrao, tabhi ek option ko poora likhwao. Outline mein ek lafz badalna poore article ki direction badal sakta hai — final draft mein ek lafz badalna sirf ek lafz badalta hai.</p></div>
+
+<div class="para-block"><span class="para-label">4 Kism Ke Asks:</span>
+<table class="mini-table">
+<tr><th>Kism</th><th>Tight karo</th><th>Loose karo</th></tr>
+<tr><td>Brainstorm</td><td>problem, audience</td><td>structure, tone, length</td></tr>
+<tr><td>Research</td><td>scope, sources</td><td>jawab (umeed batao mat)</td></tr>
+<tr><td>Drafting</td><td>sab kuch</td><td>kuch nahi</td></tr>
+<tr><td>Analysis</td><td>data, sawal</td><td>conclusion</td></tr>
+</table>
+</div>
+
+<h2>Part 3: Text Se Aage</h2>
+
+<div class="para-block"><span class="para-label">Idea 8 (Multimodal — Images Aur Audio):</span><p class="para-text">Image parhna: AI overall scene, bare shapes, whiteboard, handwriting parh sakta hai. Weak: fine detail, choti cheezein ginna. Image banana: Text AI se pehle image prompt likhwao, phir image tool mein paste karo — ye diffusion model hai, noise se shuru hota hai, ek dafa mein pura banta hai. Zabardast trick — diagrams: pehle Claude se SVG banwao, phir ChatGPT/Gemini se redraw karwao — 10-15 minute mein professional diagram. Audio: speak kar ke prompt de sakte ho, meeting recording daal kar summary mango.</p></div>
+
+<div class="para-block"><span class="para-label">Idea 9 (Ek Prompt Se Chhoti App Banana):</span><p class="para-text">Sab 3 tools ek chhoti app "artifact/canvas" mein bana dete hain — edit, share, download ho sakti hai. 3 slots: Goal (kya karna hai), Input (user kya dega), Output (user kya dekhega). Kya kaam karta hai: chhoti games, timers, calculators. Kya mushkil hai: multiplayer, live language coaching.</p></div>
+
+<div class="para-block"><span class="para-label">Idea 10 (Data Analysis — AI Khud Code Chalata Hai):</span><p class="para-text">Spreadsheet upload karo, sawal poocho — AI code likhta hai, chalata hai, result se jawab deta hai. Zaroori check: AI hamesha code nahi chalata, kabhi guess kar leta hai. 3 aadatein: seedha poocho "code likho aur chalao, dikhao", dekho jawab mein code block hai ya nahi, pehle checkable fact poocho (row count, column names).</p></div>
+
+<h2>Part 4: Safely Kaam Karna Aur Tools Chunna</h2>
+
+<div class="para-block"><span class="para-label">Idea 11 (AI Desktop Apps Aur Permissions):</span><p class="para-text">Ye apps (Cowork, OpenWork) aapki files ko access, edit kar sakti hain. Safe workflow (4 steps): Task batao → Plan mango (action nahi) → Plan parho, review karo → Tabhi approve karo. Zaroori khatra: Delete ki files recycle bin mein nahi jatin. Edit ki files ka koi history nahi hota. Sabse chhota permission do jo zaroori hai.</p></div>
+
+<div class="para-block"><span class="para-label">Idea 12 (Cost, Speed, Aur Kaunsa Model):</span><p class="para-text">Cost order (sasta se mehnga): Text → Speech → Images → Video → Deep research (video text se ~16 guna mehnga). AI jagged hai — har model alag kaam mein acha hai, leader badalta rehta hai. 2 aadatein: same prompt 2-3 models mein try karo, sirf ek tool se shaadi mat karo. Model ladder: ek company ke andar fast/medium/heavy models hote hain — sahi rung chuno.</p></div>
+
+<div class="para-block"><span class="para-label">Idea 13 (Koi Expert Na Ho To):</span><p class="para-text">Jab kisi kaam mein koi human expert judge available nahi hota, to alag alag companies ke models ek doosre ke jawab ko check karte hain — ye aapko best signal deta hai ke kaam kitna sahi hai. Har model ka jagged frontier alag hai, is liye ek model doosre ki galtiyan pakar leta hai jo khud us galti se anjaan hota.</p></div>
+
+<div class="summary-box">
+  <h2 style="margin-top:0; border:none;">End Summary (Aik Nazar Mein)</h2>
+  <ul>
+    <li>Power-user prompt = ek briefing, sirf sawal nahi</li>
+    <li>AI training se seekha hai — jo topic zyada likha gaya, usme strong, jo kam likha gaya, usme weak</li>
+    <li>3 tareeqe: Pretrained (yaad se), Web search (live pages), Deep research (poori report)</li>
+    <li>Context window = 6 layers (system prompt, tools, aapka prompt, chat history, files, memory)</li>
+    <li>Thinking mode "achi tarah socho" bolne se on hota hai — hard sawalon ke liye</li>
+    <li>Sycophancy: AI agree karne ki taraf jhukta hai — neutral alfaz aur rubric use karo</li>
+    <li>Brainstorm-iterate loop: context → options → feedback → dobara → tabhi expand</li>
+    <li>Images/audio parhna aur banana alag skills hain</li>
+    <li>Ek prompt se chhoti app ban sakti hai (Goal, Input, Output)</li>
+    <li>Data analysis: AI code chalata hai, lekin confirm karo ke waqai chalaya</li>
+    <li>Desktop apps ko sirf zaroori chhota permission do, plan pehle mango</li>
+    <li>Har model alag kaam mein acha hai — kai models try karo, ek se shaadi mat karo</li>
+    <li>Koi expert na ho to, models ek doosre ko grade kar sakte hain — best signal</li>
+  </ul>
+</div>
+
+<div id="quiz-section">
+  <h2 style="margin-top:50px;">Quiz — 20 Real-World Scenario Questions</h2>
+  <p class="quiz-intro">Ye quiz seedhi seedhi definitions nahi poochta — har sawal ek real-world situation deta hai. Sab 20 sawal attempt karein phir "Quiz Submit Karein" dabayein.</p>
+  <div id="score-banner" class="score-banner" style="display:none;"></div>
+  <div id="quiz-questions"></div>
+  <div class="quiz-actions">
+    <button id="submitQuizBtn" class="btn-primary">Quiz Submit Karein</button>
+    <button id="retakeQuizBtn" class="btn-secondary" style="display:none;">Dobara Quiz Lein</button>
+  </div>
+</div>
+
+<footer>
+  Source: <a href="https://agentfactory.panaversity.org/docs/ai-prompting-2026" target="_blank">https://agentfactory.panaversity.org/docs/ai-prompting-2026</a>
+</footer>
+
+</div>
+
+<script>
+const quizData = [
+  {
+    q: "Ek user poochta hai 'kaunsi gaari behtar hai?' aur generic 3-model list milti hai. Doosra user spec sheets, dealer quotes, aur apni driving pattern spreadsheet attach karta hai. Farak kya hai?",
+    options: ["Koi farak nahi, dono same jawab lenge", "Pehla novice prompt hai (sirf sawal), doosra power-user briefing hai (files+context+limits+exact ask)", "Doosra hamesha slow jawab lega", "Pehla behtar hai kyun ke chota hai"],
+    correct: 1,
+    explain: "Briefing ke 4 hisse: files, goal, limits, exact sawal. Novice prompt sirf aakhri wala deta hai — power user sab kuch deta hai."
+  },
+  {
+    q: "Ek AI ek obscure gaon ke folk game ke rules ke baare mein bohat confident jawab deta hai, lekin galat nikalta hai. Kyun?",
+    options: ["AI ne jaan boojh kar dhoka diya", "Us topic par internet text bohat kam tha, is liye AI ne milte julte games blend kar diye — thin data se confident guess", "AI hamesha galat hota hai obscure topics par", "Ye ek software bug hai"],
+    correct: 1,
+    explain: "Reliability training text follow karti hai — jitna kam likha gaya topic, utni kam reliability, chahe confidence high ho."
+  },
+  {
+    q: "Ek user poochta hai 'is saal mere mulk mein tax rules mein kya badla?'. Kaunsa mode sahi jawab dega?",
+    options: ["Pretrained — yaad se kaafi hai", "Web search — current/recent info ke liye zaroori hai", "Deep research hamesha behtar hai", "Koi bhi mode chalega"],
+    correct: 1,
+    explain: "Recent regulatory changes almost certainly knowledge cutoff ke baad hain — web search zaroori hai current info ke liye."
+  },
+  {
+    q: "Ek user apni AI settings mein likhta hai 'main nurse hoon, clinical vocabulary use karo'. Iska kya asar hoga?",
+    options: ["Kuch nahi, ye sirf ek dafa ke liye kaam karta hai", "Ye system prompt mein ek line add ho jati hai, har future chat isay parhta hai — dobara batana nahi parta", "Ye sirf ek chat mein kaam karta hai", "Isse model khud badal jata hai"],
+    correct: 1,
+    explain: "Ye apni khud ki instruction layer hai — company ke system prompt ke saath load hoti hai har chat mein, is liye repeat nahi karna parta."
+  },
+  {
+    q: "Ek lambi chat mein AI workout plan bana raha tha, phir spreadsheet debug ki, ab thank-you note likhwa rahe hain. Jawab ajeeb aur vague ho rahe hain. Kya masla hai?",
+    options: ["AI thak gaya hai", "Context rot — kai alag topics ek lambi chat mein hone se jawab kharab hote hain, nayi chat kholni chahiye", "Ye normal hai, koi masla nahi", "Model khud kharab ho gaya"],
+    correct: 1,
+    explain: "Context rot ka symptom hai — jab topic badle, nayi chat kholna chahiye taake purani unrelated baatein gher se hat jayein."
+  },
+  {
+    q: "Ek teacher har hafte apna syllabus aur school calendar dobara paste karti hai. 2 dafa ye ho chuka hai. Kya karna chahiye?",
+    options: ["Har hafte yehi karte raho", "Project banao — files/instructions ek jagah save karo, har naya chat khud parh lega", "AI se yaad rakhne ko kaho", "Kuch farak nahi parta"],
+    correct: 1,
+    explain: "2 dafa same context paste hone ka matlab hai ye Project mein jana chahiye — har chat automatically inherit karega."
+  },
+  {
+    q: "Ek user 'memory' feature use karta hai. Kya iska matlab hai model ki weights update hui hain?",
+    options: ["Haan, model ne kuch naya seekha", "Nahi — memory tool ka likha hua note hai jo har naye chat mein dobara daala jata hai, model stateless hi rehta hai", "Memory feature sirf paid users ke liye hai", "Memory se model permanent smart ho jata hai"],
+    correct: 1,
+    explain: "Memory model ka apna hafiza nahi banati — tool aik note likh kar har chat mein wapas load karta hai."
+  },
+  {
+    q: "Ek user aik quick spelling check karwana chahta hai. Kya usay 'thinking mode' on karni chahiye?",
+    options: ["Haan, hamesha on rakhni chahiye", "Nahi — thinking mode slow aur mehngi hai, quick lookups ke liye off rakhna chahiye", "Sirf hard sawalon ke liye off karni chahiye", "Thinking mode se koi farak nahi parta"],
+    correct: 1,
+    explain: "Thinking mode kab NOT use karein: quick lookups, one-paragraph summaries — save it for hard, multi-trade-off questions."
+  },
+  {
+    q: "Ek user poochta hai 'kya remote work office work se behtar hai?' aur AI agree karta hai. Wahi user opposite sawal poochta hai, AI phir agree karta hai. Ye kya dikhata hai?",
+    options: ["AI hamesha sahi hota hai", "Sycophancy — AI conclusion-loaded questions mein agree karne ki taraf jhukta hai", "AI random jawab deta hai", "Ye sirf is model ka masla hai"],
+    correct: 1,
+    explain: "Sycophancy: models thumbs-up training se agree karna seekh gaye hain. Neutral wording (evaluate, compare) is jhukav ko kam karti hai."
+  },
+  {
+    q: "Ek founder apni business idea ko 'critique karo' kehta hai aur warm praise milti hai. Wahi idea ko rubric ke sath ('score 1-10 on: problem, market, advantage') poochta hai — 8/100 milta hai. Kya sabaq hai?",
+    options: ["Rubric se AI zyada strict ho jata hai, harmful hai", "Named rubric criteria vague praise ki bajaye AI ko committed number dene par majboor karti hai — jyada honest feedback", "Ye ek glitch tha", "Rubric sirf hard ideas ke liye kaam karta hai"],
+    correct: 1,
+    explain: "Named standards force AI to look carefully; vague standards collapse into 'great work'. Numbers commit, prose does not."
+  },
+  {
+    q: "Ek marketer 'campaign ideas' mangta hai lekin har limit pehle se tight rakhta hai (exact tagline, tone, 40-word cap). AI 5 near-identical ideas deta hai. Kya masla hai?",
+    options: ["AI creative nahi hai", "Brainstorming ke liye structure/tone/format loosen karna chahiye tha, sirf problem/audience tight rakhna chahiye tha", "Marketer ne bohat kam limits diye", "Ye normal behavior hai"],
+    correct: 1,
+    explain: "Brainstorming mein tighten: problem, audience; loosen: structure, tone, format, length. Backwards karne se rewordings milti hain, truly different directions nahi."
+  },
+  {
+    q: "Ek user ek 600-word blog post seedha 'likh do' bolta hai bina outline ke. Result thin/generic lagta hai. Kya masla hai?",
+    options: ["AI ka koi masla nahi", "Step skip kiya — outline pehle banana chahiye tha, kyun ke outline mein ek lafz badalna poori direction badal sakta hai", "Blog posts hamesha thin hoti hain", "AI ko zyada time chahiye tha"],
+    correct: 1,
+    explain: "AI's first draft of anything is slop. Loop skip karne se generic result milta hai — outline se power milti hai, final draft se nahi."
+  },
+  {
+    q: "Ek teacher ek whiteboard photo bhejti hai jahan uska sar 'convolutional' lafz block kar raha tha. AI ne wo lafz sahi guess kar liya diagram ke context se. Ye AI ki kaunsi strength dikhata hai?",
+    options: ["Fine detail zoom karna", "Overall sense se fill-in karna — jahan detail missing ho, pattern se anuman lagana", "Perfect OCR karna", "Photo edit karna"],
+    correct: 1,
+    explain: "AI overall scene aur pattern se filling-in mein acha hai, lekin fine detail zoom karne mein kamzor — yahi is misaal ka sabaq hai."
+  },
+  {
+    q: "Ek user diagram banwana chahta hai jo professional lage. Sahi tareeqa kya hai?",
+    options: ["Sirf ChatGPT se seedha bolna 'diagram banao'", "Pehle Claude se SVG banwana (structure ke liye), phir ChatGPT/Gemini se redraw karwana (design finish ke liye)", "Sirf Gemini use karna kaafi hai", "Diagram banwana AI se mumkin nahi"],
+    correct: 1,
+    explain: "Chain survives: strongest reasoning model (Claude) structure ke liye, strongest text-heavy image model (ChatGPT/Gemini) finish ke liye."
+  },
+  {
+    q: "Ek business owner spreadsheet upload kar ke poochta hai 'sales trends kya hain?'. AI ek confident paragraph deta hai lekin koi code block nahi dikhata. Kya masla ho sakta hai?",
+    options: ["Koi masla nahi, jawab sahi hoga", "AI ne shayad code chalaye bina estimate kiya — poochna chahiye tha 'code likho aur chalao, dikhao'", "Spreadsheet upload nahi hui hogi", "AI hamesha code chalata hai"],
+    correct: 1,
+    explain: "Model doesn't run code on every question — silent failure hai. Seedha poocho aur code block check karo ke waqai run hua."
+  },
+  {
+    q: "Ek AI se 'row count aur column names batao is file ki' poocha jata hai, aur jawab suspiciously round number aur off column names deta hai. Ye kya signal hai?",
+    options: ["File corrupt hai", "AI shayad file nahi padh raha, invent kar raha hai — checkable fact se pakra jata hai", "Ye normal hai", "File format galat hai"],
+    correct: 1,
+    explain: "Checkable fact test: agar AI waqai file padh raha ho to exact answers aayenge; invent kar raha ho to round numbers aur galat labels aayenge."
+  },
+  {
+    q: "Ek consultant AI desktop app ko apni clients/ folder access deti hai pehli baar. Sahi approach kya hai?",
+    options: ["Foran 'full disk access' de dena", "Task batao, plan mango (action nahi), review karo, tabhi approve karo — pehli baar chhoti folder ka read-only access de", "Kuch bhi poocho bina check kiye", "Seedha delete/rename kaam karwao"],
+    correct: 1,
+    explain: "Safe workflow: task → plan (not action) → review → approve. Permission ladder ke mutabiq first sessions mein sirf read-only, chhoti folder."
+  },
+  {
+    q: "Ek AI app se ek file delete ho jati hai. User sochta hai 'recycle bin mein hogi'. Kya ye sahi hai?",
+    options: ["Haan, hamesha recycle bin mein jaati hai", "Nahi — AI app se delete files aksar recycle bin skip kar deti hain, permanently chali jaati hain", "Sirf Windows mein ye masla hai", "Recycle bin sirf manual delete ke liye hai"],
+    correct: 1,
+    explain: "Zaroori warning: deleted files often do NOT go to recycle bin jab AI app deletes them — is liye smallest permission dena zaroori hai."
+  },
+  {
+    q: "Ek user sirf ek AI (jaise ChatGPT) har kaam ke liye use karta hai, kabhi doosra try nahi karta. Chapter ke mutabiq kya masla hai?",
+    options: ["Koi masla nahi, consistency achi hoti hai", "AI jagged hai — har model alag kaam mein leads karta hai, ek hi tool se shaadi karna galat hai", "Doosre models kabhi behtar nahi hote", "Switching mehnga hota hai"],
+    correct: 1,
+    explain: "Jagged ability: leader har kaam mein badalta rehta hai. Same prompt 2-3 models mein try karna aur farak dekhna zaroori habit hai."
+  },
+  {
+    q: "Ek legal writing task ke liye koi human expert available nahi hai judge karne ko. Kaunsa tareeqa best signal deta hai?",
+    options: ["Sirf ek AI se pooch kar maan lena", "Kai companies ke alag models se ek doosre ke jawab grade karwana — har model ka jagged frontier alag hai, ek doosre ki galtiyan pakarta hai", "Koi bhi tareeqa kaam nahi karega", "Sirf sabse mehnge model par bharosa karna"],
+    correct: 1,
+    explain: "Idea 13: koi expert na ho to, alag companies ke models ek doosre ko grade karna best signal deta hai, kyun ke unki jagged frontiers alag hoti hain."
+  }
+];
+
+let userAnswers = new Array(quizData.length).fill(null);
+
+function renderQuiz() {
+  const container = document.getElementById('quiz-questions');
+  container.innerHTML = '';
+  quizData.forEach((item, idx) => {
+    const qDiv = document.createElement('div');
+    qDiv.className = 'quiz-question';
+    qDiv.id = 'q-block-' + idx;
+    let optionsHtml = '';
+    item.options.forEach((opt, oIdx) => {
+      optionsHtml += `
+        <label class="quiz-option" id="opt-${idx}-${oIdx}">
+          <input type="radio" name="q${idx}" value="${oIdx}" onchange="selectAnswer(${idx}, ${oIdx})">
+          <span>${opt}</span>
+        </label>`;
+    });
+    qDiv.innerHTML = `
+      <p class="quiz-q-text"><strong>Sawal ${idx + 1}:</strong> ${item.q}</p>
+      <div class="quiz-options">${optionsHtml}</div>
+      <p class="quiz-explain" id="explain-${idx}" style="display:none;"></p>
+    `;
+    container.appendChild(qDiv);
+  });
+}
+
+function selectAnswer(qIdx, oIdx) {
+  userAnswers[qIdx] = oIdx;
+}
+
+function submitQuiz() {
+  let score = 0;
+  let unanswered = 0;
+  quizData.forEach((item, idx) => {
+    const selected = userAnswers[idx];
+    if (selected === null) unanswered++;
+    for (let o = 0; o < item.options.length; o++) {
+      const label = document.getElementById(`opt-${idx}-${o}`);
+      label.querySelector('input').disabled = true;
+      if (o === item.correct) {
+        label.classList.add('correct-answer');
+      } else if (o === selected && selected !== item.correct) {
+        label.classList.add('wrong-answer');
+      }
+    }
+    if (selected === item.correct) score++;
+    const explainEl = document.getElementById(`explain-${idx}`);
+    explainEl.textContent = 'Wazahat: ' + item.explain;
+    explainEl.style.display = 'block';
+  });
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const banner = document.getElementById('score-banner');
+  banner.style.display = 'block';
+  let msg = `Aapka Score: ${score} / ${quizData.length} (${percent}%)`;
+  if (unanswered > 0) msg += ` — ${unanswered} sawal chhoray gaye the.`;
+  if (percent >= 70) {
+    banner.className = 'score-banner pass';
+  } else {
+    banner.className = 'score-banner fail';
+    msg += ' — 70% se kam hai, chapter dobara review karein.';
+  }
+  banner.textContent = msg;
+  banner.scrollIntoView({behavior:'smooth', block:'start'});
+
+  document.getElementById('submitQuizBtn').style.display = 'none';
+  document.getElementById('retakeQuizBtn').style.display = 'inline-block';
+}
+
+function retakeQuiz() {
+  userAnswers = new Array(quizData.length).fill(null);
+  document.getElementById('score-banner').style.display = 'none';
+  document.getElementById('submitQuizBtn').style.display = 'inline-block';
+  document.getElementById('retakeQuizBtn').style.display = 'none';
+  renderQuiz();
+  document.getElementById('quiz-section').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+document.getElementById('submitQuizBtn').addEventListener('click', submitQuiz);
+document.getElementById('retakeQuizBtn').addEventListener('click', retakeQuiz);
+renderQuiz();
+</script>
+
+</body>
+</html>
